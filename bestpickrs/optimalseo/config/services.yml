@@ -1,0 +1,46 @@
+imports:
+    - { resource: parameters.yml }
+
+services:
+    bestpickrs.optimalseo.controller.main:
+        class: bestpickrs\optimalseo\controller\main_controller
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@language'
+
+    bestpickrs.optimalseo.controller.acp:
+        class: bestpickrs\optimalseo\controller\acp_controller
+        arguments:
+            - '@config'
+            - '@language'
+            - '@log'
+            - '@request'
+            - '@template'
+            - '@user'
+
+    bestpickrs.optimalseo.service:
+        class: bestpickrs\optimalseo\service
+        arguments:
+            - '@user'
+            - '%bestpickrs.optimalseo.tables.optimalseo_table%'
+
+    bestpickrs.optimalseo.listener:
+        class: bestpickrs\optimalseo\event\main_listener
+        arguments:
+            - '@language'
+            - '@controller.helper'
+            - '@template'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }
+
+    bestpickrs.optimalseo.cron.task.sample:
+        class: bestpickrs\optimalseo\cron\task\sample
+        arguments:
+            - '@config'
+        calls:
+            - [set_name, [cron.task.bestpickrs.optimalseo.sample]]
+        tags:
+            - { name: cron.task }

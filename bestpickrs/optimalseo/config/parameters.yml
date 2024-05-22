@@ -1,0 +1,2 @@
+parameters:
+    bestpickrs.optimalseo.tables.optimalseo_table: '%core.table_prefix%bestpickrs_optimalseo_table'

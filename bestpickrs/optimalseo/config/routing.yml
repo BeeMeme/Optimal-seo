@@ -1,0 +1,3 @@
+bestpickrs_optimalseo_controller:
+    path: /demo/{name}
+    defaults: { _controller: bestpickrs.optimalseo.controller.main:handle }
